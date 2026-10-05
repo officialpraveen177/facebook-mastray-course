@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praveen Ads Agency - Facebook & Pixel Ads Mastery Course</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        praveen: {
+                            orange: '#FF5722',
+                            orangeLight: '#FF7043',
+                            orangeDark: '#E64A19',
+                            amber: '#FFA000',
+                            gold: '#FFD700',
+                            charcoal: '#12131A',
+                            darkNavy: '#0A0C10',
+                            cardBg: '#1A1C24',
+                            border: 'rgba(255, 87, 34, 0.25)'
+                        },
+                        telegram: {
+                            DEFAULT: '#229ED9',
+                            dark: '#0088cc',
+                            light: '#2AABEE'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif']
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'shine': 'shine 3s infinite linear'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(255, 87, 34, 0.4), 0 0 25px rgba(34, 158, 217, 0.3)' },
+                            '50%': { boxShadow: '0 0 30px rgba(255, 87, 34, 0.8), 0 0 45px rgba(34, 158, 217, 0.7)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        shine: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 87, 34, 0.12) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+
+        .orange-gradient-text {
+            background: linear-gradient(135deg, #FFD700 0%, #FF7043 40%, #FF5722 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .orange-metallic-card {
+            background: linear-gradient(145deg, rgba(26, 28, 36, 0.95), rgba(10, 12, 16, 0.98));
+            border: 1px solid rgba(255, 87, 34, 0.25);
+        }
+
+        .orange-metallic-card:hover {
+            border-color: rgba(255, 87, 34, 0.7);
+            box-shadow: 0 10px 30px -10px rgba(255, 87, 34, 0.35);
+        }
+
+        .btn-gradient-orange {
+            background: linear-gradient(135deg, #FFA000 0%, #FF5722 50%, #E64A19 100%);
+            color: #FFFFFF;
+        }
+
+        .btn-gradient-orange:hover {
+            background: linear-gradient(135deg, #FF5722 0%, #FFA000 50%, #FF7043 100%);
+        }
+    </style>
+</head>
+<body class="bg-praveen-darkNavy text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-praveen-orange selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur-xl bg-praveen-darkNavy/90 border-b border-praveen-orange/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo with Praveen Ads Branding -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="relative">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-praveen-orangeDark via-praveen-orange to-praveen-amber flex items-center justify-center text-white font-heading font-black text-2xl shadow-lg shadow-praveen-orange/30 border border-amber-300">
+                            P
+                        </div>
+                        <i class="fa-solid fa-chart-line absolute -top-1 -right-1 text-praveen-gold text-xs animate-pulse"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl sm:text-2xl font-black font-heading tracking-wider orange-gradient-text block leading-none">PRAVEEN ADS</span>
+                        <span class="text-[10px] sm:text-xs text-slate-300 font-extrabold tracking-widest uppercase">I Make Your Business Look Good</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs (Desktop) -->
+                <nav class="hidden lg:flex space-x-1 bg-praveen-cardBg/90 p-1.5 rounded-full border border-praveen-orange/30 shadow-inner">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 text-white bg-gradient-to-r from-praveen-orange to-praveen-amber shadow-md">Home</button>
+                    <button onclick="navigateTo('modules')" id="nav-modules" class="nav-btn px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800">Course Modules</button>
+                    <button onclick="navigateTo('pixel')" id="nav-pixel" class="nav-btn px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800">Pixel Setup</button>
+                    <button onclick="navigateTo('reviews')" id="nav-reviews" class="nav-btn px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800">Student Results</button>
+                    <button onclick="navigateTo('join')" id="nav-join" class="nav-btn px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 text-slate-300 hover:text-white hover:bg-slate-800">VIP Telegram</button>
+                </nav>
+
+                <!-- Header Action CTAs -->
+                <div class="hidden sm:flex items-center space-x-3">
+                    <button onclick="openConfigModal()" class="p-2.5 rounded-xl bg-praveen-cardBg text-praveen-amber hover:text-white hover:bg-slate-800 transition border border-praveen-orange/30" title="Set Telegram Handle">
+                        <i class="fa-solid fa-gear text-lg"></i>
+                    </button>
+                    <a href="https://t.me/" target="_blank" class="tg-link-btn inline-flex items-center px-5 py-2.5 rounded-xl font-black text-white bg-gradient-to-r from-telegram to-telegram-dark hover:from-telegram-light hover:to-telegram transition shadow-lg shadow-telegram/30 transform hover:-translate-y-0.5 border border-cyan-400/30">
+                        <i class="fa-brands fa-telegram text-xl mr-2"></i>
+                        <span>Join Telegram</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center space-x-2">
+                    <button onclick="openConfigModal()" class="p-2 rounded-lg bg-praveen-cardBg text-praveen-amber">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="p-2 rounded-lg bg-praveen-cardBg text-slate-300 hover:text-white border border-slate-700">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-praveen-charcoal border-b border-praveen-orange/30 px-4 pt-2 pb-6 space-y-2">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-white bg-praveen-orange">Home</button>
+            <button onclick="navigateTo('modules'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-300 hover:bg-slate-800">Course Modules</button>
+            <button onclick="navigateTo('pixel'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-300 hover:bg-slate-800">Meta Pixel Setup</button>
+            <button onclick="navigateTo('reviews'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-300 hover:bg-slate-800">Student Results & ROAS</button>
+            <button onclick="navigateTo('join'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-xl font-bold text-slate-300 hover:bg-slate-800">Join Telegram & Config</button>
+            <a href="https://t.me/" target="_blank" class="tg-link-btn w-full mt-4 inline-flex items-center justify-center px-5 py-3 rounded-xl font-black text-white bg-gradient-to-r from-telegram to-telegram-dark shadow-lg border border-cyan-400/40">
+                <i class="fa-brands fa-telegram text-2xl mr-2"></i>
+                <span>Join Telegram Channel</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- ================= SECTION 1: HOME / HERO ================= -->
+        <section id="page-home" class="page-section relative overflow-hidden py-12 lg:py-20 bg-grid-pattern">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-praveen-orange/15 rounded-full filter blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-telegram/20 rounded-full filter blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Hero Content -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        
+                        <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-praveen-cardBg/90 border border-praveen-orange/50 shadow-inner">
+                            <i class="fa-solid fa-bullhorn text-praveen-amber animate-bounce"></i>
+                            <span class="text-xs sm:text-sm font-black text-white tracking-wider uppercase">Praveen Ads Agency • Master Special Batch</span>
+                        </div>
+
+                        <h1 class="text-4xl sm:text-6xl font-black font-heading tracking-tight text-white leading-tight">
+                            <span class="orange-gradient-text text-3xl sm:text-5xl block mb-2">FACEBOOK ADS & META PIXEL</span>
+                            <span class="bg-gradient-to-r from-praveen-orange via-praveen-amber to-praveen-gold text-praveen-darkNavy px-4 py-1.5 inline-block transform -rotate-1 rounded-2xl shadow-2xl font-black text-2xl sm:text-4xl">
+                                COMPLETE MASTERY COURSE
+                            </span> <br>
+                            <span class="text-xl sm:text-3xl font-extrabold text-slate-200 mt-3 block tracking-wide">
+                                Scale Your Business High ROAS & Conversions
+                            </span>
+                        </h1>
+
+                        <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                            Learn step-by-step how to set up Meta Pixel, CAPI (Conversion API), custom events, retargeting, and scale Facebook Ads up to 10X ROAS with Praveen Ads Agency!
+                        </p>
+
+                        <!-- Counter Grid -->
+                        <div class="grid grid-cols-3 gap-3 pt-2 max-w-lg mx-auto lg:mx-0">
+                            <div class="orange-metallic-card p-3.5 rounded-2xl text-center">
+                                <div class="text-2xl sm:text-3xl font-black text-praveen-amber font-heading">10X+</div>
+                                <div class="text-[11px] text-slate-300 font-bold uppercase">Max ROAS Achieved</div>
+                            </div>
+                            <div class="orange-metallic-card p-3.5 rounded-2xl text-center">
+                                <div class="text-2xl sm:text-3xl font-black text-praveen-orange font-heading">₹50L+</div>
+                                <div class="text-[11px] text-slate-300 font-bold uppercase">Ad Spend Managed</div>
+                            </div>
+                            <div class="orange-metallic-card p-3.5 rounded-2xl text-center">
+                                <div class="text-2xl sm:text-3xl font-black text-telegram-light font-heading">1,500+</div>
+                                <div class="text-[11px] text-slate-300 font-bold uppercase">Students Trained</div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Action Button -->
+                        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                            <a href="https://t.me/" target="_blank" class="tg-link-btn animate-pulse-glow w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-telegram via-telegram-light to-telegram-dark text-white font-black text-xl flex items-center justify-center space-x-3 shadow-2xl hover:scale-105 transition duration-300 border-2 border-cyan-300/40">
+                                <i class="fa-brands fa-telegram text-3xl"></i>
+                                <span>Get Course & Pixel Setup On Telegram</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <!-- Visual Card -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none bg-gradient-to-b from-praveen-cardBg via-praveen-charcoal to-slate-950 p-6 rounded-3xl border-2 border-praveen-orange/60 shadow-2xl backdrop-blur-xl">
+                            
+                            <div class="text-center mb-6">
+                                <div class="inline-block relative">
+                                    <span class="font-heading orange-gradient-text text-2xl font-black block">PRAVEEN ADS AGENCY</span>
+                                    <div class="bg-praveen-orange text-white text-sm font-black px-4 py-1 rounded-xl shadow-lg mt-1 tracking-wider uppercase">
+                                        I Make Your Business Look Good
+                                    </div>
+                                    <i class="fa-solid fa-crown text-praveen-gold text-2xl absolute -top-5 -right-3"></i>
+                                </div>
+                            </div>
+
+                            <!-- Key Course Highlights -->
+                            <div class="space-y-3 mb-6">
+                                <div class="bg-praveen-cardBg/90 border border-praveen-orange/30 p-3.5 rounded-2xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-microchip text-praveen-amber text-xl"></i>
+                                        <span class="text-sm font-extrabold text-white">Meta Pixel & CAPI Setup</span>
+                                    </div>
+                                    <span class="text-xs bg-green-500/20 text-green-400 font-black px-2.5 py-1 rounded-full border border-green-500/40">100% Practical</span>
+                                </div>
+
+                                <div class="bg-praveen-cardBg/90 border border-praveen-orange/30 p-3.5 rounded-2xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-bullseye text-praveen-orange text-xl"></i>
+                                        <span class="text-sm font-extrabold text-white">Custom Audience & Retargeting</span>
+                                    </div>
+                                    <span class="text-xs bg-praveen-amber/20 text-praveen-amber font-black px-2.5 py-1 rounded-full border border-praveen-amber/40">Advanced</span>
+                                </div>
+
+                                <div class="bg-praveen-cardBg/90 border border-praveen-orange/30 p-3.5 rounded-2xl flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fa-solid fa-headset text-telegram-light text-xl"></i>
+                                        <span class="text-sm font-extrabold text-white">1-on-1 VIP Support</span>
+                                    </div>
+                                    <span class="text-xs bg-telegram/20 text-telegram-light font-black px-2.5 py-1 rounded-full border border-telegram/40">Lifetime Telegram</span>
+                                </div>
+                            </div>
+
+                            <!-- Telegram Direct CTA -->
+                            <a href="https://t.me/" target="_blank" class="tg-link-btn block text-center bg-gradient-to-r from-telegram to-telegram-dark hover:from-telegram-light hover:to-telegram text-white font-black py-3.5 px-4 rounded-2xl text-lg shadow-xl transition transform active:scale-95 border border-cyan-400/40">
+                                <i class="fa-brands fa-telegram text-2xl align-middle mr-2"></i>
+                                Join Free Telegram Community
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= SECTION 2: COURSE MODULES ================= -->
+        <section id="page-modules" class="page-section hidden py-16 bg-praveen-charcoal/80 min-h-[70vh]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="px-4 py-1.5 rounded-full bg-praveen-orange/10 text-praveen-orange border border-praveen-orange/30 text-xs font-black uppercase tracking-widest">
+                        📚 Complete Curriculum
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-black font-heading text-white mt-4 mb-4">
+                        What You Will Learn In <span class="orange-gradient-text">This Mastery Course</span>
+                    </h2>
+                    <p class="text-slate-300 text-lg">
+                        From basic Business Manager configuration to high-level scale strategies and automated conversions.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Module 1 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-praveen-orange/20 text-praveen-orange flex items-center justify-center text-2xl font-black mb-4 border border-praveen-orange/30">
+                                01
+                            </div>
+                            <h3 class="text-xl font-black text-white mb-2">Meta Pixel & CAPI Mastery</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Complete setup of Meta Pixel, Conversion API (CAPI), Server-side tracking, and iOS 14+ tracking bypass strategies.
+                            </p>
+                        </div>
+                        <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Custom Event Tracking</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Domain Verification & Aggregated Events</li>
+                        </ul>
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn w-full py-3 rounded-xl btn-gradient-orange text-center text-xs font-black uppercase tracking-wider block">
+                            Inquire Module on Telegram
+                        </a>
+                    </div>
+
+                    <!-- Module 2 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-praveen-amber/20 text-praveen-amber flex items-center justify-center text-2xl font-black mb-4 border border-praveen-amber/30">
+                                02
+                            </div>
+                            <h3 class="text-xl font-black text-white mb-2">Audience Research & Lookalike</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Master laser-targeted audience creation, 1%-10% Lookalike Audiences (LAL), and custom retargeting funnels.
+                            </p>
+                        </div>
+                        <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Cold vs Warm Audience Funnel</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> High-converting Interest Stacking</li>
+                        </ul>
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn w-full py-3 rounded-xl btn-gradient-orange text-center text-xs font-black uppercase tracking-wider block">
+                            Inquire Module on Telegram
+                        </a>
+                    </div>
+
+                    <!-- Module 3 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-telegram/20 text-telegram-light flex items-center justify-center text-2xl font-black mb-4 border border-telegram/30">
+                                03
+                            </div>
+                            <h3 class="text-xl font-black text-white mb-2">Ad Creatives & Copywriting</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Learn how to write compelling ad scripts, high-converting headline hooks, and design scroll-stopping video/image ads.
+                            </p>
+                        </div>
+                        <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Praveen Ads Hook Framework</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> High ROAS Canva & Video Templates</li>
+                        </ul>
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn w-full py-3 rounded-xl btn-gradient-orange text-center text-xs font-black uppercase tracking-wider block">
+                            Inquire Module on Telegram
+                        </a>
+                    </div>
+
+                    <!-- Module 4 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-praveen-orange/20 text-praveen-orange flex items-center justify-center text-2xl font-black mb-4 border border-praveen-orange/30">
+                                04
+                            </div>
+                            <h3 class="text-xl font-black text-white mb-2">Campaign Scaling Strategies</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Vertical & Horizontal scaling techniques (CBO vs ABO), Rules automation, and budget multiplier methods.
+                            </p>
+                        </div>
+                        <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Budget Scaling without ROAS Drop</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Automated Meta Rules Setup</li>
+                        </ul>
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn w-full py-3 rounded-xl btn-gradient-orange text-center text-xs font-black uppercase tracking-wider block">
+                            Inquire Module on Telegram
+                        </a>
+                    </div>
+
+                    <!-- Module 5 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-praveen-amber/20 text-praveen-amber flex items-center justify-center text-2xl font-black mb-4 border border-praveen-amber/30">
+                                05
+                            </div>
+                            <h3 class="text-xl font-black text-white mb-2">A/B Testing & Optimization</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Scientific method to test creatives, audiences, and landing pages to reduce Cost Per Lead (CPL) & Cost Per Purchase.
+                            </p>
+                        </div>
+                        <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Dynamic Creative Testing (DCT)</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Landing Page Conversion Hacks</li>
+                        </ul>
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn w-full py-3 rounded-xl btn-gradient-orange text-center text-xs font-black uppercase tracking-wider block">
+                            Inquire Module on Telegram
+                        </a>
+                    </div>
+
+                    <!-- Module 6 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl font-black mb-4 border border-emerald-500/30">
+                                06
+                            </div>
+                            <h3 class="text-xl font-black text-white mb-2">Agency Business & Client Acquisition</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                                Bonus module on how to start your own Ads Agency, price your retainer plans, and close high-ticket clients.
+                            </p>
+                        </div>
+                        <ul class="text-xs text-slate-400 space-y-2 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Client Audit & Proposal Decks</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-praveen-amber mr-2"></i> Retainer Pricing Models</li>
+                        </ul>
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn w-full py-3 rounded-xl btn-gradient-orange text-center text-xs font-black uppercase tracking-wider block">
+                            Inquire Module on Telegram
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECTION 3: LIVE PIXEL SETUP SERVICES ================= -->
+        <section id="page-pixel" class="page-section hidden py-16 min-h-[70vh]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="px-4 py-1.5 rounded-full bg-praveen-orange/10 text-praveen-orange border border-praveen-orange/30 text-xs font-black uppercase tracking-widest">
+                        ⚙️ Done-For-You & Guided
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-black font-heading text-white mt-4 mb-4">
+                        Meta Pixel Setup <span class="orange-gradient-text">& Audit Services</span>
+                    </h2>
+                    <p class="text-slate-300 text-lg">
+                        Get your Meta Pixel, Conversion API (CAPI), and Custom Events configured error-free by Praveen Ads Agency.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                    
+                    <!-- Step 1 -->
+                    <div class="orange-metallic-card p-8 rounded-3xl relative">
+                        <div class="w-14 h-14 rounded-2xl bg-praveen-orange text-white flex items-center justify-center text-2xl font-black mb-6 shadow-lg shadow-praveen-orange/30">
+                            1
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-3">Domain & Business Audit</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            We verify your domain inside Meta Business Manager, fix restricted ad accounts, and structure your business settings properly.
+                        </p>
+                        <span class="text-xs text-praveen-amber font-bold"><i class="fa-solid fa-shield-halved mr-1"></i> Safe & Compliant</span>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="orange-metallic-card p-8 rounded-3xl relative border-2 border-praveen-orange">
+                        <div class="w-14 h-14 rounded-2xl bg-praveen-amber text-praveen-darkNavy flex items-center justify-center text-2xl font-black mb-6 shadow-lg shadow-praveen-amber/30">
+                            2
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-3">Pixel & CAPI Integration</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Connecting Meta Pixel with Server-Side Conversion API (CAPI) on Shopify, WordPress, WooCommerce, or custom React/HTML landing pages.
+                        </p>
+                        <span class="text-xs text-green-400 font-bold"><i class="fa-solid fa-bolt mr-1"></i> iOS 14+ Data Recovery</span>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="orange-metallic-card p-8 rounded-3xl relative">
+                        <div class="w-14 h-14 rounded-2xl bg-telegram text-white flex items-center justify-center text-2xl font-black mb-6 shadow-lg shadow-telegram/30">
+                            3
+                        </div>
+                        <h3 class="text-2xl font-black text-white mb-3">Event Firing & Testing</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                            Setting up PageView, ViewContent, AddToCart, InitiateCheckout, Lead, and Purchase custom parameters with real-time payload testing.
+                        </p>
+                        <span class="text-xs text-telegram-light font-bold"><i class="fa-solid fa-check-double mr-1"></i> Verified In Test Events</span>
+                    </div>
+
+                </div>
+
+                <div class="orange-metallic-card p-8 rounded-3xl max-w-4xl mx-auto text-center border-2 border-praveen-amber">
+                    <h3 class="text-2xl font-black text-white mb-2">Need Direct Done-For-You Pixel Setup?</h3>
+                    <p class="text-slate-300 text-sm max-w-xl mx-auto mb-6">
+                        Don't want to do it alone? Message Praveen Ads Agency on Telegram for instant remote or assisted Meta Pixel setup service!
+                    </p>
+                    <a href="https://t.me/" target="_blank" class="tg-link-btn inline-flex items-center px-8 py-4 rounded-2xl bg-gradient-to-r from-telegram via-telegram-light to-telegram-dark text-white font-black text-lg shadow-xl hover:scale-105 transition border border-cyan-300/40">
+                        <i class="fa-brands fa-telegram text-2xl mr-3"></i>
+                        <span>Book Instant Pixel Setup Service</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECTION 4: STUDENT RESULTS & REVIEWS ================= -->
+        <section id="page-reviews" class="page-section hidden py-16 bg-praveen-charcoal/80 min-h-[70vh]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="px-4 py-1.5 rounded-full bg-praveen-orange/10 text-praveen-orange border border-praveen-orange/30 text-xs font-black uppercase tracking-widest">
+                        🔥 Proof & Success Stories
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-black font-heading text-white mt-4 mb-4">
+                        Real Results From <span class="orange-gradient-text">Praveen Ads Agency</span>
+                    </h2>
+                    <p class="text-slate-300 text-lg">
+                        See how our students and clients generated massive ROAS using our Facebook Ads strategies.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Result Card 1 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs bg-green-500/20 text-green-400 font-black px-3 py-1 rounded-full border border-green-500/30">
+                                    ROAS: 8.4X
+                                </span>
+                                <div class="text-praveen-gold">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-4">
+                                <div class="text-xs text-slate-400 mb-1">E-Commerce Brand Campaign</div>
+                                <div class="text-2xl font-black text-praveen-amber">₹3,42,000 Revenue</div>
+                                <div class="text-xs text-slate-300 mt-1">Ad Spend: ₹40,700 • Purchases: 380+</div>
+                            </div>
+
+                            <p class="text-slate-300 text-xs leading-relaxed italic mb-4">
+                                "Praveen sir ki Pixel setup tricks aur Lookalike audience strategy seekhne ke baad mera ROAS 2.1X se seedha 8.4X ho gaya!"
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-praveen-orange/20 text-praveen-orange flex items-center justify-center font-bold">
+                                RS
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-white">Rahul Sharma</div>
+                                <div class="text-[10px] text-slate-400">E-Commerce Business Owner</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Card 2 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between border-2 border-praveen-orange">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs bg-praveen-amber/20 text-praveen-amber font-black px-3 py-1 rounded-full border border-praveen-amber/30">
+                                    ROAS: 12.1X
+                                </span>
+                                <div class="text-praveen-gold">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-4">
+                                <div class="text-xs text-slate-400 mb-1">Digital Course Funnel</div>
+                                <div class="text-2xl font-black text-praveen-orange">₹5,10,000 Revenue</div>
+                                <div class="text-xs text-slate-300 mt-1">Ad Spend: ₹42,100 • Cost per Lead: ₹11</div>
+                            </div>
+
+                            <p class="text-slate-300 text-xs leading-relaxed italic mb-4">
+                                "Best Facebook Ads course in India. Practical Meta Pixel CAPI setup step-by-step guidance mila Telegram VIP group me!"
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-praveen-amber/20 text-praveen-amber flex items-center justify-center font-bold">
+                                VP
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-white">Vikram Patel</div>
+                                <div class="text-[10px] text-slate-400">Digital Creator & Coach</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Result Card 3 -->
+                    <div class="orange-metallic-card p-6 rounded-3xl flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-xs bg-telegram/20 text-telegram-light font-black px-3 py-1 rounded-full border border-telegram/30">
+                                    ROAS: 6.9X
+                                </span>
+                                <div class="text-praveen-gold">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-4">
+                                <div class="text-xs text-slate-400 mb-1">Local Business Lead Gen</div>
+                                <div class="text-2xl font-black text-telegram-light">420+ High Quality Leads</div>
+                                <div class="text-xs text-slate-300 mt-1">Cost per Lead: ₹18 • Conversion: 34%</div>
+                            </div>
+
+                            <p class="text-slate-300 text-xs leading-relaxed italic mb-4">
+                                "Praveen Ads Agency ka client acquisition module seekh kar ab mai har month 3 retainers handle kar raha hu!"
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-800 flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-telegram/20 text-telegram-light flex items-center justify-center font-bold">
+                                AK
+                            </div>
+                            <div>
+                                <div class="text-sm font-bold text-white">Amit Verma</div>
+                                <div class="text-[10px] text-slate-400">Agency Owner</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= SECTION 5: JOIN TELEGRAM & LINK CONFIGURATOR ================= -->
+        <section id="page-join" class="page-section hidden py-16 min-h-[70vh]">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Telegram CTA Banner Card -->
+                <div class="bg-gradient-to-br from-praveen-cardBg via-praveen-charcoal to-slate-950 border-2 border-praveen-orange rounded-3xl p-8 sm:p-12 text-center shadow-2xl relative overflow-hidden">
+                    <div class="w-20 h-20 bg-gradient-to-tr from-praveen-orange via-praveen-amber to-praveen-gold text-white rounded-2xl flex items-center justify-center mx-auto text-4xl mb-6 shadow-2xl animate-bounce">
+                        <i class="fa-brands fa-telegram"></i>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-5xl font-black font-heading text-white mb-3">
+                        Join Official <br>
+                        <span class="orange-gradient-text text-3xl sm:text-5xl">PRAVEEN ADS VIP TELEGRAM</span>
+                    </h2>
+
+                    <p class="text-slate-300 text-base sm:text-lg max-w-xl mx-auto my-6 font-medium">
+                        Get daily Facebook Ads tips, Meta Pixel setup scripts, winning ad copy templates, and direct 1-on-1 support from Praveen Ads Agency!
+                    </p>
+
+                    <div class="max-w-md mx-auto">
+                        <a href="https://t.me/" target="_blank" class="tg-link-btn animate-pulse-glow w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-telegram via-telegram-light to-telegram-dark text-white font-black text-2xl flex items-center justify-center space-x-3 shadow-2xl border-2 border-cyan-300/40 hover:scale-105 transition">
+                            <i class="fa-brands fa-telegram text-3xl"></i>
+                            <span>Join Telegram Channel Now</span>
+                        </a>
+                    </div>
+
+                    <p class="text-xs text-praveen-amber font-black uppercase tracking-wider mt-6">
+                        🔥 Praveen Ads Agency • I Make Your Business Look Good
+                    </p>
+                </div>
+
+                <!-- Dynamic Telegram Link Configurator Tool -->
+                <div class="mt-10 bg-praveen-cardBg border border-praveen-orange/40 rounded-2xl p-6 shadow-xl">
+                    <div class="flex items-center space-x-3 mb-3">
+                        <i class="fa-solid fa-link text-praveen-amber text-xl"></i>
+                        <h3 class="font-black text-white text-base">Owner Tool: Dynamic Telegram Link Configurator</h3>
+                    </div>
+                    <p class="text-xs text-slate-300 mb-4">
+                        Enter your official Telegram channel or group link (e.g. <code class="text-telegram-light">https://t.me/praveen_ads_agency</code>). Clicking Apply will immediately update every button on this site in real time!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input type="url" id="custom-tg-url" placeholder="https://t.me/your_telegram_handle" class="flex-grow bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-praveen-orange">
+                        <button onclick="updateTelegramLinks()" class="px-6 py-3 rounded-xl btn-gradient-orange transition shrink-0 text-xs font-black uppercase tracking-wider">
+                            Apply Link To All Buttons
+                        </button>
+                    </div>
+                    <p id="link-status-msg" class="text-xs text-green-400 font-bold mt-2 hidden">
+                        <i class="fa-solid fa-circle-check mr-1"></i> Telegram Link Updated! All buttons are now redirecting to your new link.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Telegram Action Button -->
+    <a href="https://t.me/" target="_blank" class="tg-link-btn fixed bottom-6 right-6 z-40 bg-gradient-to-r from-telegram to-telegram-dark text-white p-4 sm:px-6 sm:py-3.5 rounded-full shadow-2xl hover:scale-110 transition duration-300 flex items-center space-x-2 border-2 border-cyan-300/40 animate-pulse-glow">
+        <i class="fa-brands fa-telegram text-3xl"></i>
+        <span class="hidden sm:inline font-black text-sm">Join Telegram VIP</span>
+    </a>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 border-t border-praveen-orange/30 py-8 text-center text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="font-heading orange-gradient-text text-lg font-extrabold">PRAVEEN ADS AGENCY</span>
+            </div>
+            <p>© 2026 Praveen Ads Agency. "I Make Your Business Look Good". All Rights Reserved.</p>
+            <div class="flex space-x-4 text-xs font-bold">
+                <button onclick="navigateTo('home')" class="hover:text-praveen-orange">Home</button>
+                <button onclick="navigateTo('modules')" class="hover:text-praveen-orange">Modules</button>
+                <button onclick="navigateTo('pixel')" class="hover:text-praveen-orange">Pixel Setup</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global Telegram Link Settings Modal -->
+    <div id="config-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-praveen-cardBg border-2 border-praveen-orange rounded-3xl p-6 max-w-md w-full shadow-2xl relative">
+            <button onclick="closeConfigModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-praveen-orange/20 text-praveen-orange flex items-center justify-center text-xl mx-auto mb-3 border border-praveen-orange/40">
+                    <i class="fa-solid fa-gear"></i>
+                </div>
+                <h3 class="text-xl font-black text-white font-heading">Set Telegram Link</h3>
+                <p class="text-xs text-slate-400 mt-1">Updates all Telegram CTA links on this landing page</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 mb-1">Telegram Handle / Group URL</label>
+                    <input type="url" id="modal-tg-url" placeholder="https://t.me/your_telegram_handle" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-praveen-orange">
+                </div>
+                <button onclick="saveModalLink()" class="w-full py-3 rounded-xl btn-gradient-orange text-xs font-black uppercase tracking-wider transition">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dynamic JavaScript Controller -->
+    <script>
+        let currentTelegramUrl = "https://t.me/";
+
+        // Navigation Controller between 5 Sections/Pages
+        function navigateTo(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.add('hidden'));
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+            }
+
+            // Tab Styling Updates
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-gradient-to-r', 'from-praveen-orange', 'to-praveen-amber', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-300', 'hover:text-white', 'hover:bg-slate-800');
+            });
+
+            const activeNavBtn = document.getElementById('nav-' + pageId);
+            if (activeNavBtn) {
+                activeNavBtn.classList.remove('text-slate-300', 'hover:text-white', 'hover:bg-slate-800');
+                activeNavBtn.classList.add('bg-gradient-to-r', 'from-praveen-orange', 'to-praveen-amber', 'text-white', 'shadow-md');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('hidden');
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-xl';
+            }
+        }
+
+        // Apply Telegram URL to all buttons across the entire page
+        function applyTelegramUrl(url) {
+            if (!url) return;
+            currentTelegramUrl = url;
+            const buttons = document.querySelectorAll('.tg-link-btn');
+            buttons.forEach(btn => {
+                btn.setAttribute('href', url);
+            });
+        }
+
+        // Update Telegram Links from Page 5 Tool
+        function updateTelegramLinks() {
+            const input = document.getElementById('custom-tg-url');
+            const msg = document.getElementById('link-status-msg');
+            if (input && input.value.trim() !== '') {
+                applyTelegramUrl(input.value.trim());
+                msg.classList.remove('hidden');
+                setTimeout(() => msg.classList.add('hidden'), 3500);
+            }
+        }
+
+        // Modal Controls
+        function openConfigModal() {
+            document.getElementById('config-modal').classList.remove('hidden');
+            document.getElementById('modal-tg-url').value = currentTelegramUrl;
+        }
+
+        function closeConfigModal() {
+            document.getElementById('config-modal').classList.add('hidden');
+        }
+
+        function saveModalLink() {
+            const val = document.getElementById('modal-tg-url').value.trim();
+            if (val) {
+                applyTelegramUrl(val);
+                const page5Input = document.getElementById('custom-tg-url');
+                if (page5Input) page5Input.value = val;
+            }
+            closeConfigModal();
+        }
+    </script>
+</body>
+</html>
